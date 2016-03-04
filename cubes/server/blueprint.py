@@ -334,14 +334,14 @@ def aggregate(cube_name):
         aggregates += agg.split("|")
 
     drilldown = []
-
     ddlist = request.args.getlist("drilldown")
     if ddlist:
         for ddstring in ddlist:
             drilldown += ddstring.split("|")
 
     prepare_cell("split", "split")
-
+    print(drilldown)
+    print(g.browser)
     result = g.browser.aggregate(g.cell,
                                  aggregates=aggregates,
                                  drilldown=drilldown,

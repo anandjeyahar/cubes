@@ -76,7 +76,7 @@ class AggregationBrowser(object):
         """
         return {}
 
-    def aggregate(self, cell=None, aggregates=None, drilldown=None, split=None,
+    def aggregate(self, cell=None, aggregates=None, drilldown_dims=None, split=None,
                   order=None, page=None, page_size=None, **options):
 
         """Return aggregate of a cell.
@@ -120,6 +120,7 @@ class AggregationBrowser(object):
 
         Note: subclasses should implement `provide_aggregate()` method.
         """
+        import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
         if "measures" in options:
             raise ArgumentError("measures in aggregate are depreciated")
@@ -143,11 +144,11 @@ class AggregationBrowser(object):
                                     role_member_converters=converters)
             split = Cell(self.cube, cuts)
 
-        drilldon = Drilldown(drilldown, cell)
+        drilldowns = Drilldown(drilldown_dims, cell)
 
         result = self.provide_aggregate(cell,
                                         aggregates=aggregates,
-                                        drilldown=drilldon,
+                                        drilldown=drilldowns,
                                         split=split,
                                         order=order,
                                         page=page,
@@ -163,7 +164,7 @@ class AggregationBrowser(object):
 
         result.calculators = calculators_for_aggregates(self.cube,
                                                         calculated_aggs,
-                                                        drilldown,
+                                                        drilldown_dims,
                                                         split)
 
         # Do calculated measures on summary if no drilldown or split
@@ -870,7 +871,7 @@ class AggregationResult(object):
 
 
 class Drilldown(object):
-    def __init__(self, drilldown=None, cell=None):
+    def __init__(self, drilldowns=None, cell=None):
         """Creates a drilldown object for `drilldown` specifictation of `cell`.
         The drilldown object can be used by browsers for convenient access to
         various drilldown properties.
@@ -885,7 +886,7 @@ class Drilldown(object):
         or dimension name ``drilldown["date"]``. Iterating the object yields
         all drilldown items.
         """
-        self.drilldown = levels_from_drilldown(cell, drilldown)
+        self.drilldown = levels_from_drilldown(cell, drilldowns)
         self.dimensions = []
         self._contained_dimensions = set()
 

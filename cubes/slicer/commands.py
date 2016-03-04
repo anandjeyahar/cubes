@@ -403,12 +403,12 @@ def denormalize(ctx, force, materialize, index, schema, cube, target):
 #     # Shortcuts
 #     workspace = ctx.obj.workspace
 #     store = ctx.obj.store
-# 
+#
 #     ddl = store.ddl_for_model(args.url, model, fact_prefix=args.fact_prefix,
 #                                 dimension_prefix=args.dimension_prefix,
 #                                 fact_suffix=args.fact_suffix,
 #                                 dimension_suffix=args.dimension_suffix)
-# 
+#
 #     print(ddl)
 
 
