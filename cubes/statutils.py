@@ -35,7 +35,6 @@ def calculators_for_aggregates(cube, aggregates, drilldown_levels=None,
         try:
             factory = CALCULATED_AGGREGATIONS[aggregate.function]
         except KeyError:
-            import pdb; pdb.set_trace()
             raise ArgumentError("Unknown post-calculation function '%s' for "
                                 "aggregate '%s'" % (aggregate.function,
                                                     aggregate.name))
