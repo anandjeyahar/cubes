@@ -120,7 +120,6 @@ class AggregationBrowser(object):
 
         Note: subclasses should implement `provide_aggregate()` method.
         """
-        import pdb; pdb.set_trace()  # XXX BREAKPOINT
 
         if "measures" in options:
             raise ArgumentError("measures in aggregate are depreciated")

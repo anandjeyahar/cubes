@@ -340,11 +340,9 @@ def aggregate(cube_name):
             drilldown += ddstring.split("|")
 
     prepare_cell("split", "split")
-    print(drilldown)
-    print(g.browser)
     result = g.browser.aggregate(g.cell,
                                  aggregates=aggregates,
-                                 drilldown=drilldown,
+                                 drilldown_dims=drilldown,
                                  split=g.split,
                                  page=g.page,
                                  page_size=g.page_size,
